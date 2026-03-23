@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🇯🇵 东京 4.25–4.26</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --red: #c0392b;
+    --gold: #c9a84c;
+    --cream: #f5f0e8;
+    --paper: #faf7f2;
+    --muted: #8a8070;
+    --border: #e0d8cc;
+    --stamp-red: #b03a2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '東京';
+    font-family: 'Noto Serif SC', serif;
+    font-size: 88px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: -4px;
+    line-height: 1;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .flag { font-size: 28px; margin-bottom: 6px; }
+  .stamp {
+    background: var(--stamp-red);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 3px;
+    transform: rotate(3deg);
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── NAV TABS ── */
+  .tabs {
+    display: flex;
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .tab {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    letter-spacing: 1px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .tab-icon { font-size: 16px; display: block; margin-bottom: 2px; }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 0 0 80px; }
+  .section.active { display: block; }
+
+  /* ── DAY HEADER ── */
+  .day-header {
+    padding: 20px 20px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .day-badge {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 10px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .day-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .day-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  /* ── TIMELINE ITEMS ── */
+  .timeline {
+    padding: 8px 20px;
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0 14px;
+    margin-bottom: 2px;
+    position: relative;
+  }
+  .tl-item:not(:last-child) .tl-line {
+    position: absolute;
+    left: 25px;
+    top: 32px;
+    bottom: -10px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+    padding-top: 14px;
+    line-height: 1.3;
+  }
+  .tl-dot-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tl-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .tl-card:active { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+  .tl-card.type-transport { border-left: 3px solid #5dade2; }
+  .tl-card.type-food      { border-left: 3px solid var(--red); }
+  .tl-card.type-photo     { border-left: 3px solid #8e44ad; }
+  .tl-card.type-shop      { border-left: 3px solid var(--gold); }
+  .tl-card.type-hotel     { border-left: 3px solid #27ae60; }
+  .tl-card.type-sweet     { border-left: 3px solid #e91e8c; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .card-emoji { font-size: 16px; margin-right: 6px; flex-shrink: 0; }
+  .card-name {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.3;
+    flex: 1;
+  }
+  .card-name-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 1px;
+  }
+  .badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-left: 6px;
+  }
+  .badge-warn { background: #fef3cd; color: #856404; }
+  .badge-ok   { background: #d1e7dd; color: #0f5132; }
+  .badge-tip  { background: #cfe2ff; color: #084298; }
+  .badge-hot  { background: #f8d7da; color: #842029; }
+
+  .card-note {
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed var(--border);
+    line-height: 1.5;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .meta-pill {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--cream);
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 20px 4px;
+    margin: 2px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* ── ALERT BOX ── */
+  .alert {
+    margin: 8px 20px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+  }
+  .alert-warn { background: #fff8e1; border-left: 3px solid #ffc107; }
+  .alert-info { background: #e3f2fd; border-left: 3px solid #2196f3; }
+  .alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── CHECKLIST ── */
+  .checklist-section {
+    padding: 16px 20px;
+  }
+  .check-group-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 16px 0 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    margin-top: 1px;
+  }
+  .check-item.done .check-box {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .check-item.done .check-box::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+  .check-item.done .check-label { text-decoration: line-through; color: var(--muted); }
+  .check-label { font-size: 13px; flex: 1; line-height: 1.4; }
+  .check-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .check-urgent { color: var(--red); font-size: 10px; font-weight: 700; font-family: 'Space Mono', monospace; letter-spacing: 1px; margin-top: 2px; }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 12px 20px 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  .progress-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    padding: 0 20px;
+    margin-bottom: 4px;
+  }
+
+  /* ── INFO CARDS ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 20px 16px;
+  }
+  .info-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .info-card.full { grid-column: 1 / -1; }
+  .info-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .info-sub { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 400; }
+
+  /* ── FLOATING BACK-TO-TOP ── */
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    background: var(--ink);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .fab.visible { opacity: 1; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    padding: 20px 20px 12px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .tl-card { animation: fadeUp 0.3s ease both; }
+  .tl-item:nth-child(1) .tl-card { animation-delay: 0.05s; }
+  .tl-item:nth-child(2) .tl-card { animation-delay: 0.10s; }
+  .tl-item:nth-child(3) .tl-card { animation-delay: 0.15s; }
+  .tl-item:nth-child(4) .tl-card { animation-delay: 0.20s; }
+  .tl-item:nth-child(5) .tl-card { animation-delay: 0.25s; }
+  .tl-item:nth-child(6) .tl-card { animation-delay: 0.30s; }
+  .tl-item:nth-child(7) .tl-card { animation-delay: 0.35s; }
+  .tl-item:nth-child(8) .tl-card { animation-delay: 0.40s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="flag">🇯🇵</div>
+      <h1>东京小报</h1>
+      <div class="header-sub">Apr 25–26 · 2025</div>
+    </div>
+    <div class="stamp">TOKYO<br>TRIP<br>2025</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('day1')">
+    <span class="tab-icon">✈️</span>4.25
+  </div>
+  <div class="tab" onclick="switchTab('day2')">
+    <span class="tab-icon">📸</span>4.26
+  </div>
+  <div class="tab" onclick="switchTab('checklist')">
+    <span class="tab-icon">📋</span>准备
+  </div>
+  <div class="tab" onclick="switchTab('info')">
+    <span class="tab-icon">ℹ️</span>须知
+  </div>
+</div>
+
+<!-- ══════════ DAY 1 ══════════ -->
+<div id="day1" class="section active">
+  <div class="day-header">
+    <div class="day-badge">DAY 1</div>
+    <div>
+      <div class="day-title">抵达 · 豊洲</div>
+      <div class="day-sub">周六 · 因为是周末多预留时间</div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <div class="alert-icon">⚠️</div>
+    <div>机场大巴<b>暂未购票</b>，需提前一个月内预订或现场购买。目标班次 20:45 / 21:15，错过则需等 22:25。</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div>
+        <div class="tl-card type-transport">
+          <div class="card-top">
+            <span class="card-emoji">🚕</span>
+            <span class="card-name">打车前往机场</span>
+            <span class="badge badge-tip">~15min</span>
+          </div>
+          <div class="card-note">周六人多，提前出发</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">14:45</div>
+      <div>
+        <div class="tl-card type-transport">
+          <div class="card-top">
+            <span class="card-emoji">🛂</span>
+            <span class="card-name">Check-in + 安检</span>
+            <span class="badge badge-warn">~45min</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-pill">🛂 护照</span>
+            <span class="meta-pill">💵 现金</span>
+            <span class="meta-pill">💳 银行卡</span>
+          </div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">20:45<br>21:15</div>
+      <div>
+        <div class="tl-card type-transport">
+          <div class="card-top">
+            <span class="card-emoji">🚌</span>
+            <div>
+              <div class="card-name">Airport Limousine Bus</div>
+              <div class="card-name-jp">羽田空港 → 豊洲駅</div>
+            </div>
+            <span class="badge badge-warn">未买票</span>
+          </div>
+          <div class="card-note">目标班次：20:45 或 21:15<br>错过则等 22:25（勿写成10:25）</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">22:00</div>
+      <div>
+        <div class="tl-card type-hotel">
+          <div class="card-top">
+            <span class="card-emoji">🏨</span>
+            <div>
+              <div class="card-name">Mitsui Garden Hotel</div>
+              <div class="card-name-jp">豊洲プレミア · 已付款 ✅</div>
+            </div>
+            <span class="badge badge-ok">⭐ 4.3</span>
+          </div>
+          <div class="card-note">直连豊洲站，先存行李再出门吃宵夜</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">22:30</div>
+      <div>
+        <div class="tl-card type-food">
+          <div class="card-top">
+            <span class="card-emoji">🍶</span>
+            <div>
+              <div class="card-name">Uokin 魚金 · 夜宵</div>
+              <div class="card-name-jp">居酒屋 · 步行可达</div>
+            </div>
+            <span class="badge badge-tip">⭐ 3.5</span>
+          </div>
+          <div class="card-note">连锁居酒屋，营业至 23:00。落地后轻松吃，期望值适中即可。<br>⚠️ 建议提前确认是否需要预约</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ DAY 2 ══════════ -->
+<div id="day2" class="section">
+  <div class="day-header">
+    <div class="day-badge">DAY 2</div>
+    <div>
+      <div class="day-title">涩谷 → 表参道</div>
+      <div class="day-sub">周日 · 拍照购物吃喝全覆盖</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">07:30<br>08:00</div>
+      <div>
+        <div class="tl-card type-hotel">
+          <div class="card-top">
+            <span class="card-emoji">🐭🐻</span>
+            <span class="card-name">鼠 / 熊 起床时间</span>
+          </div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">08:20</div>
+      <div>
+        <div class="tl-card type-transport">
+          <div class="card-top">
+            <span class="card-emoji">🚊</span>
+            <div>
+              <div class="card-name">出发 · 代代木上原</div>
+              <div class="card-name-jp">Yoyogi-Uehara → 涩谷方向</div>
+            </div>
+          </div>
+          <div class="card-note">地铁约 40 分钟，09:00 到达拍照区域</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div>
+        <div class="tl-card type-photo">
+          <div class="card-top">
+            <span class="card-emoji">📸</span>
+            <span class="card-name">拍照出片时刻</span>
+            <span class="badge badge-tip">4h</span>
+          </div>
+          <div class="card-note">涩谷附近自由发挥，神南一带光线上午好。13:00 前结束，前往午饭</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">13:15</div>
+      <div>
+        <div class="tl-card type-food">
+          <div class="card-top">
+            <span class="card-emoji">🥩</span>
+            <div>
+              <div class="card-name">Sukiyaki Chikayo · 午饭</div>
+              <div class="card-name-jp">すき焼き ちかよ 渋谷店 1F</div>
+            </div>
+            <span class="badge badge-hot">需预约！</span>
+          </div>
+          <div class="card-note">周日营业至 14:30，你 13:15 到只剩 75 分钟！<br>📍 Dogenzaka 1-16-15 Opera House Shibuya</div>
+          <div class="card-meta">
+            <span class="meta-pill">⭐ 3.9</span>
+            <span class="meta-pill">🕐 ~14:30关厨</span>
+          </div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">🚶 步行 15 min</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div>
+        <div class="tl-card type-shop">
+          <div class="card-top">
+            <span class="card-emoji">🛍️</span>
+            <div>
+              <div class="card-name">Shibuya PARCO</div>
+              <div class="card-name-jp">渋谷パルコ · 营业至 21:00</div>
+            </div>
+            <span class="badge badge-ok">⭐ 4.3</span>
+          </div>
+          <div class="card-note">🎮 6F 有任天堂旗舰店！B1 餐厅层也值得逛</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">🚶 步行 8 min</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">16:15</div>
+      <div>
+        <div class="tl-card type-sweet">
+          <div class="card-top">
+            <span class="card-emoji">🥞</span>
+            <div>
+              <div class="card-name">Au Temps Jadis · 甜品</div>
+              <div class="card-name-jp">可丽饼 · Jinnan 1-5-4 1F</div>
+            </div>
+            <span class="badge badge-ok">⭐ 4.4</span>
+          </div>
+          <div class="card-note">⚠️ 排队较长，周日人多。建议 16:15 前到。营业至 19:00<br>备选：旁边 Jinnan Cafe 舒芙蕾（⭐3.7，几乎不用等）</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">🚶 步行 6 min</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">16:45</div>
+      <div>
+        <div class="tl-card type-shop">
+          <div class="card-top">
+            <span class="card-emoji">🧥</span>
+            <span class="card-name">街牌购物区</span>
+            <span class="badge badge-tip">~1h</span>
+          </div>
+          <div class="card-note">Kith Tokyo · Supreme · Off-White · Chrome Hearts 都在这一带，营业至 21:00</div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">🚶 一路逛到表参道</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">19:00</div>
+      <div>
+        <div class="tl-card type-food">
+          <div class="card-top">
+            <span class="card-emoji">🔥</span>
+            <div>
+              <div class="card-name">Yakiniku Ushigoro · 晚饭</div>
+              <div class="card-name-jp">焼肉うしごろ 表参道店 2F</div>
+            </div>
+            <span class="badge badge-ok">⭐ 4.2</span>
+          </div>
+          <div class="card-note">推荐主选！服务员帮你烤肉，午市套餐性价比高。<br>📍 Jingumae 5-50-3 2F · 建议提前官网预约<br>备选：KINTAN 涮锅（同街，⭐4.1）</div>
+          <div class="card-meta">
+            <span class="meta-pill">💰💰💰</span>
+            <span class="meta-pill">🕐 营业至 23:30</span>
+          </div>
+        </div>
+        <div class="tl-line"></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">20:00+</div>
+      <div>
+        <div class="tl-card type-shop">
+          <div class="card-top">
+            <span class="card-emoji">💊</span>
+            <span class="card-name">药妆 / 电子城</span>
+            <span class="badge badge-tip">如果没累死</span>
+          </div>
+          <div class="card-note">表参道周边多家药妆，大部分营业至 21:00–22:00</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ CHECKLIST ══════════ -->
+<div id="checklist" class="section">
+  <div class="section-title">出发前 Checklist</div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-text" id="progressText">0 / 0 已完成</div>
+
+  <div class="checklist-section">
+
+    <div class="check-group-title">🔴 紧急 — 需要提前完成</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div>
+        <div class="check-label">购买机场大巴票</div>
+        <div class="check-sub">Airport Limousine · 羽田→豊洲 · 20:45 or 21:15 班次</div>
+        <div class="check-urgent">⚡ 一个月内预订 / 现场购买</div>
+      </div>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div>
+        <div class="check-label">预约 Sukiyaki Chikayo 午饭</div>
+        <div class="check-sub">周日 13:15，关厨 14:30，时间紧！</div>
+        <div class="check-urgent">⚡ 强烈建议提前预约</div>
+      </div>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div>
+        <div class="check-label">预约 Yakiniku Ushigoro 晚饭</div>
+        <div class="check-sub">表参道店 · ushigoro.com</div>
+        <div class="check-urgent">⚡ 热门店建议提前</div>
+      </div>
+    </div>
+
+    <div class="check-group-title">📦 行李准备</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">护照（两本）</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div>
+        <div class="check-label">现金（日元）</div>
+        <div class="check-sub">部分小店只收现金，建议备 2–3 万円</div>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">银行卡 / 信用卡</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div>
+        <div class="check-label">IC 卡 / Suica</div>
+        <div class="check-sub">坐地铁用，如果没有可在机场购买</div>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">充电宝 + 转换插头（日本 A 型）</div>
+    </div>
+
+    <div class="check-group-title">📱 出发当天</div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">下载 Google Maps 离线地图（东京）</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">确认酒店地址截图</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-label">确认两人机票已值机</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ INFO ══════════ -->
+<div id="info" class="section">
+  <div class="section-title">行程须知</div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-label">酒店</div>
+      <div class="info-value">三井ガーデン 豊洲</div>
+      <div class="info-sub">已付款 ✅<br>直连豊洲站</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">酒店电话</div>
+      <div class="info-value">03-3534-3931</div>
+      <div class="info-sub">评分 4.3 ⭐</div>
+    </div>
+    <div class="info-card full">
+      <div class="info-label">机场大巴路线</div>
+      <div class="info-value">羽田 T3 → 豊洲駅</div>
+      <div class="info-sub">Airport Limousine Bus<br>目标：20:45 / 21:15 · 备选：22:25</div>
+    </div>
+    <div class="info-card full">
+      <div class="info-label">4.26 午饭</div>
+      <div class="info-value">Sukiyaki Chikayo</div>
+      <div class="info-sub">Dogenzaka 1-16-15 Opera House 1F<br>⚠️ 周日 14:30 关厨，必须预约</div>
+    </div>
+    <div class="info-card full">
+      <div class="info-label">4.26 晚饭（推荐）</div>
+      <div class="info-value">Yakiniku Ushigoro</div>
+      <div class="info-sub">Jingumae 5-50-3 2F · 表参道<br>备选：Shabushabu KINTAN 同街</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">甜品首选</div>
+      <div class="info-value">Au Temps Jadis</div>
+      <div class="info-sub">可丽饼 ⭐4.4<br>Jinnan 1-5-4 1F</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">甜品备选</div>
+      <div class="info-value">Jinnan Cafe</div>
+      <div class="info-sub">舒芙蕾 ⭐3.7<br>几乎不用排队</div>
+    </div>
+    <div class="info-card full">
+      <div class="info-label">紧急联系 · 日本报警/急救</div>
+      <div class="info-value">🚨 110 · 🚑 119</div>
+      <div class="info-sub">中国大使馆：03-3452-3561</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<div class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const tabs = ['day1','day2','checklist','info'];
+    document.querySelectorAll('.tab')[tabs.indexOf(id)].classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function toggleCheck(item) {
+    item.classList.toggle('done');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.check-item');
+    const done = document.querySelectorAll('.check-item.done');
+    const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `${done.length} / ${all.length} 已完成`;
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('fab').classList.toggle('visible', window.scrollY > 200);
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
